@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	DB := config.InitDBTest()
+	DB := config.InitDB()
 	authRepo := repository.NewAuthRepo(DB)
 	authService := service.NewAuthService(authRepo)
 	api := api.NewAuthHandler(authService)
