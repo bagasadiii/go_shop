@@ -40,6 +40,9 @@ func(as *AuthService)RegisterService(username, email, password string)error{
 	if err := as.Repo.CreateUser(user); err != nil {
 		return errors.New("failed to create user: " + err.Error())
 	}
+	if err := utils.SendToUserService(user.UserID, user.Email, user.Username); err != nil {
+		return errors.New("failed to sent: " + err.Error())
+	}
 	return nil
 }
 func(as *AuthService)Login(username, password string)(*model.User, string, error){
